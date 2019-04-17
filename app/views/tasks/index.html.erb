@@ -1,9 +1,34 @@
-<h1>タスク管理</h1>
 
 
 <% if logged_in? %>
-  <p>ログイン完了ユーザ: <%= current_user.name %></p>
+  <h1><%= current_user.name %>さんのタスク一覧</h1>
+  <div class="row">
+    <div class="col-xs-8">
+      <table class="table table-scriped">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>タスク</th></th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @tasks.each do |task| %>
+            <tr>
+              <td><%= link_to task.id, task %></td>
+              <td><%= task.content %></td>
+              <td><%= task.status %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div>
+        <%= paginate @tasks %>
+      </div>
+    </div>
+  </div>
 <% else %>
+  <h1>タスク管理アプリ</h1>
   <div class="center jumbotron">
     <div class="text-center">
       <h1>登録してログインしてね</h1>
